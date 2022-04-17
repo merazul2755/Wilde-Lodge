@@ -48,8 +48,18 @@ const Blogs = () => {
         </ul>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 mb-10">
         <h1 className="font-bold text-2xl mb-3">02. What other services does firebase provide other than authentication?</h1>
+        <p className="mt-4 mb-4">There are many services which Firebase provides, Most useful of them are:</p>
+
+        <ul className="marker:text-sky-400 list-disc ml-5">
+            <li>Cloud Firestore</li>
+            <li>Cloud Functions</li>
+            <li>Authentication</li>
+            <li>Hosting</li>
+            <li>Cloud Storage</li>
+            <li>Cloud Messaging</li>
+        </ul>
         </div>
     </div>
   );
