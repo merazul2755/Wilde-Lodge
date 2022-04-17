@@ -14,7 +14,7 @@ const Header = () => {
       </div>
 
       <div className="md:flex justify-around items-center font-bold">
-        <h1 className="pl-10 ml-16 w-full text-3xl">Wilde Lodge</h1>
+        <h1 className="pl-20 w-full text-3xl">Wilde Lodge</h1>
 
         <ul
           className={`md:flex leading-10S text-lg justify-end text-center mr-20 bg-indigo-600 md:static absolute w-full duration-500 ease-in ${
