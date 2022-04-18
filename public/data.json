@@ -1,0 +1,21 @@
+[
+    {
+        "id":1,
+        "img": "Images/image-1.jpg",
+        "name":"Weddings At Wilde Lodge",
+        "des":"Lose yourself in the magical unspoilt and wild countryside, whether it's a small intimate affair or the wedding of a decade with live music, Ferris wheels and fireworks the experienced team will help you create the most enjoyable and memorable of occasions."
+        
+    },
+    {
+        "id":2,
+        "img": "Images/image-2.jpg",
+        "name":"Open Days",
+        "des":"Come and join us for a guided tour around The Lodge. With five open days a year there are lots of opportunities to get inspired and start planning the event of your dreams in your very own party paradise."
+    },
+    {
+        "id":3,
+        "img": "Images/image-3.jpg",
+        "name":"Food At Wilde Lodge",
+        "des":"We provide seasonal, locally sourced, nutritious and inventive food for our in-house guests.  From arrival treats to picnic hampers and special dinners, we love to celebrate the diverse interests and skills of our local producers and share them with you. All of our food options are available to book below. "
+    }
+]
