@@ -21,31 +21,31 @@ const Header = () => {
             open ? "top-12" : "top-[-170px]"
           }`}
         >
-          <li>
+          <li className="hover:text-red-500">
             <Link to="/" className="mr-5">
               Home
             </Link>
           </li>
-          <li>
+          <li className="hover:text-red-500">
             <Link to="/checkout" className="mr-5">
               CheckOut
             </Link>
           </li>
-          <li>
+          <li className="hover:text-red-500">
             <Link to="/blogs" className="mr-5">
               Blogs
             </Link>
           </li>
-          <li>
+          <li className="hover:text-red-500">
             <Link to="about" className="mr-5">
               About
             </Link>
           </li>
-          <li>
+          <l className="hover:text-red-500">
             <Link to="login" className="mr-5">
               Login
             </Link>
-          </li>
+          </l>
         </ul>
       </div>
     </nav>
