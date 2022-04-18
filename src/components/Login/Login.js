@@ -8,7 +8,7 @@ const Login = () => {
 
           <div className="w-full max-w-xs mx-auto lg:w-3/4">
               
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="shadow-md bg-slate-100 rounded px-8 pt-6 pb-8 mb-4">
         <h1 className="text-center font-serif font-bold text-xl mb-3">LogIn Here!</h1>
           <div className="mb-4">
             <label
