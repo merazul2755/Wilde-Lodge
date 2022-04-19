@@ -12,6 +12,7 @@ import NotFound from './components/NotFount/NotFound';
 import SignUp from './components/SignUp/SignUp';
 import useServices from './hooks/useService';
 import RequireAuth from './components/RequireAuth/RequireAuth';
+import Thanks from './components/Thanks/Thanks';
 
 function App() {
   const [service] = useServices();
@@ -33,6 +34,8 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/thanks' element={<Thanks></Thanks>}></Route>
+
         <Route path='*' element={<NotFound></NotFound>}></Route>
         
       </Routes>
