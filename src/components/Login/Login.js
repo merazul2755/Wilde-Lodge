@@ -1,7 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  getAuth,
   GoogleAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -11,7 +10,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../../Image/google-sign-in.png";
 import auth from "../../firebase.init";
-import { useAuthState } from "react-firebase-hooks/auth";
+
 
 const Login = () => {
 
