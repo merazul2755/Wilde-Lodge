@@ -5,7 +5,7 @@ Its a simple photography hireing websiste
 
 ## Firebase Hosting link
 
-Link: [https://wilde-lodge.firebaseapp.com/login](https://wilde-lodge.firebaseapp.com/login)
+Link: [https://wilde-lodge.firebaseapp.com/](https://wilde-lodge.firebaseapp.com/)
 
 ### `This Site Contain Features`
 * Home Page
