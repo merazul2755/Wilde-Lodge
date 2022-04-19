@@ -47,7 +47,7 @@ const SignUp = () => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="username"
+                htmlFor="username"
               >
                 Email
               </label>
@@ -65,7 +65,7 @@ const SignUp = () => {
             <div className="mb-2">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -82,7 +82,7 @@ const SignUp = () => {
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                htmlFor="password"
               >
                 Confirm Password
               </label>
