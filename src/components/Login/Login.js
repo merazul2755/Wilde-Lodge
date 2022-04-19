@@ -1,61 +1,52 @@
-import React, { useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  useSendPasswordResetEmail,
-  useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
-import auth from '../../firebase.init'
-import { ToastContainer, toast } from "react-toastify";
+
+import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import app from '../../firebase.init';
 import img from '../../Image/google-sign-in.png'
 
+const auth = getAuth(app);
+
 const Login = () => {
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
+ 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  const [errors, setError] = useState();
+  const provider = new GoogleAuthProvider();
+  const [error, setError] = useState("");
 
-  let from = location.state?.from?.pathname || "/";
-  let [signInWithGoogle, user1] = useSignInWithGoogle(auth);
-  let [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-  
-
-  if (user || user1) {
-    navigate(from, { replace: true });
+  const googleSignIn = () =>{
+    signInWithPopup(auth, provider)
+    
+      navigate('/checkout');
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    signInWithEmailAndPassword(email, password);
+  const handleSignIn=(e)=>{
+    if(email ==='' || password === ''){
+      setError('Email or Password Field is empty!')
+    }
+    else{
+      signInWithEmailAndPassword(auth, email,password)
     
-      setError("Password or email doesn't match!");
-    
-  };
-
-  const handleSignInWithGmail = () => {
-    signInWithGoogle();
-  };
-  // const handlePasswordReset = (email) => {
-  //   if (email) {
-  //     sendPasswordResetEmail(email);
-  //     toast("Sending Link in Email");
-  //   } else {
-  //     toast("Please enter the Email Address");
-  //   }
-  // };
-
-  // const navigateRegister = (event) => {
-  //   navigate("/register");
-  // };
+    .then(result =>{
+      const user = result.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMsg = error.message;
+      console.log(errorCode);
+    })
+    e.preventDefault();
+    navigate('/checkout');
+    }
+  }
+ 
 
   return (
     <div className="container mt-14">
       <div className="w-full max-w-xs mx-auto lg:w-3/4">
-        <form onSubmit={handleSubmit} className="shadow-md bg-slate-100 rounded px-8 pt-6 pb-8 mb-4">
+        <form className="shadow-md bg-slate-100 rounded px-8 pt-6 pb-8 mb-4">
           <h1 className="text-center font-serif font-bold text-xl mb-3">
             LogIn Here!
           </h1>
@@ -66,12 +57,11 @@ const Login = () => {
             >
               Email
             </label>
-            <input
+            <input onBlur={(e) => setEmail(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="email"
               placeholder="Email"
-              ref={emailRef}
               required
             />
           </div>
@@ -83,26 +73,25 @@ const Login = () => {
             >
               Password
             </label>
-            <input
+            <input onBlur={(e) => setPassword(e.target.value)}
               className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="******************"
-              ref={passwordRef}
               required
             />
           </div>
           <div className="items-center justify-between">
-            <button
+            <button onClick={handleSignIn}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
               type="submit">Log In</button>     
 
               <p className="text-center mt-3 mb-3">-------or-------</p>
 
-              <button className="w-full">
+              <button onClick={googleSignIn} className="w-full flex justify-center">
                 <img src={img} alt="" />
               </button>
-              
+              {error ? error : ""}
 
           </div>
           <p className="mt-3">
@@ -113,7 +102,6 @@ const Login = () => {
           </p>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };
