@@ -21,5 +21,7 @@ Link: [https://wilde-lodge.firebaseapp.com/](https://wilde-lodge.firebaseapp.com
 ### `Technology Used`
 * React
 * Tailewind
-* Firebase
+* Firebase Authentication
+* React Router
+* React Router hook
 * 
