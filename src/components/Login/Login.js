@@ -1,11 +1,12 @@
-
-import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import app from '../../firebase.init';
 import img from '../../Image/google-sign-in.png'
+import auth from '../../firebase.init';
 
-const auth = getAuth(app);
+
 
 const Login = () => {
  
@@ -22,6 +23,7 @@ const Login = () => {
   }
 
   const handleSignIn=(e)=>{
+    e.preventDefault();
     if(email ==='' || password === ''){
       setError('Email or Password Field is empty!')
     }
@@ -37,14 +39,24 @@ const Login = () => {
       const errorMsg = error.message;
       console.log(errorCode);
     })
-    e.preventDefault();
-    navigate('/checkout');
+    
     }
+    navigate('/');
   }
+
+  const handlePasswordReset = (email) => {
+    if (email) {
+      sendPasswordResetEmail(email);
+      toast("Sending Link in Email");
+    } else {
+      toast("Please enter the Email Address");
+    }
+  };
+
  
 
   return (
-    <div className="container mt-14">
+    <div className="container mt-8">
       <div className="w-full max-w-xs mx-auto lg:w-3/4">
         <form className="shadow-md bg-slate-100 rounded px-8 pt-6 pb-8 mb-4">
           <h1 className="text-center font-serif font-bold text-xl mb-3">
@@ -66,7 +78,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="mb-6">
+          <div className="mb-2">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               for="password"
@@ -81,6 +93,9 @@ const Login = () => {
               required
             />
           </div>
+          <div className='mb-3'>
+            <p>Forget Password? <strong onClick={handlePasswordReset} className='text-red-500 cursor-pointer'>Click Here!</strong></p>
+          </div>
           <div className="items-center justify-between">
             <button onClick={handleSignIn}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
@@ -91,17 +106,18 @@ const Login = () => {
               <button onClick={googleSignIn} className="w-full flex justify-center">
                 <img src={img} alt="" />
               </button>
-              {error ? error : ""}
+              {error ? <p className=" text-red-600">{error}</p> : <p></p>}
 
           </div>
           <p className="mt-3">
             Don't Have an Account?
             <Link to="/signup">
-              <strong>Sign Up</strong>
+              <strong className=' text-green-600'> Sign Up</strong>
             </Link>
           </p>
         </form>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

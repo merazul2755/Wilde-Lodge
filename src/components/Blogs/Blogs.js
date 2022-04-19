@@ -2,7 +2,7 @@ import React from "react";
 
 const Blogs = () => {
   return (
-    <div className="md:ml-20 mr-20 mt-10 ml-10">
+    <div className="md:ml-20 mr-20 mt-10 ml-10 text-justify">
         <div>
         <h1 className="font-bold text-2xl mb-3">01. Differnce Between Authorization & Authentication</h1>
       <table className="table-auto border-collapse border border-slate-400">

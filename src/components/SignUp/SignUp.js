@@ -1,10 +1,13 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
-import app from "../../firebase.init";
-const auth = getAuth(app);
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -15,17 +18,17 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-
     if (confirmPass === password && password.length >= 6) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-          const user = result.user;
-          console.log(user);
-        })
+        // .then((result) => {
+        //   const user = result.user;
+        //   console.log(user);
+        // })
         .catch((error) => {
           const errorCode = error.code;
           const errorMsg = error.message;
         });
+      sendEmailVerification(auth.currentUser);
       navigate("/login");
     } else {
       setError("Password Not Match or Must be 6 letters");
@@ -101,12 +104,12 @@ const SignUp = () => {
                 Sign Up
               </button>
             </div>
-            {error ? error : ""}
+            {error ? <p className=" text-red-600">{error}</p> : <p></p>}
 
             <p className="mt-3">
               Have an Account?
               <Link to="/login">
-                <strong> Log In</strong>
+                <strong className=" text-green-600"> Log In</strong>
               </Link>
             </p>
           </div>
