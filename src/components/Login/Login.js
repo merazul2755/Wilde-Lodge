@@ -7,7 +7,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from '../../firebase.init'
 import { ToastContainer, toast } from "react-toastify";
-
+import img from '../../Image/google-sign-in.png'
 
 const Login = () => {
   const emailRef = useRef("");
@@ -92,10 +92,16 @@ const Login = () => {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              type="submit">Log In</button>
+              type="submit">Log In</button>     
+
+              <p className="text-center mt-3 mb-3">-------or-------</p>
+
+              <button className="w-full">
+                <img src={img} alt="" />
+              </button>
               
 
           </div>

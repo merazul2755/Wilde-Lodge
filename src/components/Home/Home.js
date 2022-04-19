@@ -1,6 +1,7 @@
 import React from "react";
 import useServices from "../../hooks/useService";
 import image from "../../Image/Wilde-Lodge-Home-10.jpg";
+import Footer from "../Footer/Footer";
 import ServiceCard from "../ServiceCard/ServiceCard";
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
           ))}
         </div>
       </div>
+      
     </div>
   );
 };

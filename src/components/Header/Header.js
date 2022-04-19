@@ -41,11 +41,11 @@ const Header = () => {
               About
             </Link>
           </li>
-          <l className="hover:text-red-500">
+          <li className="hover:text-red-500">
             <Link to="login" className="mr-5">
               Login
             </Link>
-          </l>
+          </li>
         </ul>
       </div>
     </nav>
