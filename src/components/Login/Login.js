@@ -41,8 +41,9 @@ const Login = () => {
           const errorMsg = error.message;
           console.log(errorCode);
         });
+        navigate("/");
     }
-    navigate("/");
+    
   };
 
   const handlePasswordReset = (email) => {
