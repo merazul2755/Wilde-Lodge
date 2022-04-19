@@ -1,59 +1,59 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import img from '../../Image/google-sign-in.png'
-import auth from '../../firebase.init';
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import img from "../../Image/google-sign-in.png";
+import auth from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
- 
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
   const [error, setError] = useState("");
 
-  const googleSignIn = () =>{
-    signInWithPopup(auth, provider)
-    
-      navigate('/checkout');
-  }
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider);
 
-  const handleSignIn=(e)=>{
+    navigate("/");
+  };
+
+  const handleSignIn = (e) => {
     e.preventDefault();
-    if(email ==='' || password === ''){
-      setError('Email or Password Field is empty!')
+    if (email === "" || password === "") {
+      setError("Email or Password Field is empty!");
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMsg = error.message;
+          console.log(errorCode);
+        });
     }
-    else{
-      signInWithEmailAndPassword(auth, email,password)
-    
-    .then(result =>{
-      const user = result.user;
-      console.log(user);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMsg = error.message;
-      console.log(errorCode);
-    })
-    
-    }
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const handlePasswordReset = (email) => {
     if (email) {
-      sendPasswordResetEmail(email);
+      sendPasswordResetEmail(auth,email);
       toast("Sending Link in Email");
     } else {
       toast("Please enter the Email Address");
     }
   };
-
- 
 
   return (
     <div className="container mt-8">
@@ -69,7 +69,8 @@ const Login = () => {
             >
               Email
             </label>
-            <input onBlur={(e) => setEmail(e.target.value)}
+            <input
+              onBlur={(e) => setEmail(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="email"
@@ -85,7 +86,8 @@ const Login = () => {
             >
               Password
             </label>
-            <input onBlur={(e) => setPassword(e.target.value)}
+            <input
+              onBlur={(e) => setPassword(e.target.value)}
               className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
@@ -93,26 +95,40 @@ const Login = () => {
               required
             />
           </div>
-          <div className='mb-3'>
-            <p>Forget Password? <strong onClick={handlePasswordReset} className='text-red-500 cursor-pointer'>Click Here!</strong></p>
+          <div className="mb-3">
+            <p>
+              Forget Password?{" "}
+              <strong
+                onClick={handlePasswordReset}
+                className="text-red-500 cursor-pointer"
+              >
+                Click Here!
+              </strong>
+            </p>
           </div>
           <div className="items-center justify-between">
-            <button onClick={handleSignIn}
+            <button
+              onClick={handleSignIn}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              type="submit">Log In</button>     
+              type="submit"
+            >
+              Log In
+            </button>
 
-              <p className="text-center mt-3 mb-3">-------or-------</p>
+            <p className="text-center mt-3 mb-3">-------or-------</p>
 
-              <button onClick={googleSignIn} className="w-full flex justify-center">
-                <img src={img} alt="" />
-              </button>
-              {error ? <p className=" text-red-600">{error}</p> : <p></p>}
-
+            <button
+              onClick={googleSignIn}
+              className="w-full flex justify-center"
+            >
+              <img src={img} alt="" />
+            </button>
+            {error ? <p className=" text-red-600">{error}</p> : <p></p>}
           </div>
           <p className="mt-3">
             Don't Have an Account?
             <Link to="/signup">
-              <strong className=' text-green-600'> Sign Up</strong>
+              <strong className=" text-green-600"> Sign Up</strong>
             </Link>
           </p>
         </form>

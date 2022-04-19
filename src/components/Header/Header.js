@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MenuIcon, XIcon } from "@heroicons/react/solid";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -8,8 +8,13 @@ import { signOut } from "firebase/auth";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   const [user] = useAuthState(auth);
+
+  const handlesignOut = () =>{
+    signOut(auth);
+    navigate('/login');
+  }
   return (
     <nav className="h-14 text-white bg-indigo-600 items-center">
       <div
@@ -49,7 +54,7 @@ const Header = () => {
           </li>
           <li className="hover:text-red-500">
             {
-              user ? <button onClick={()=> signOut(auth)} className=" font-bold">SignOut</button> :
+              user ? <button onClick={handlesignOut} className=" font-bold">SignOut</button> :
             <Link to="login" className="mr-5">
               Login
             </Link>

@@ -6,7 +6,7 @@ import ServiceCard from "../ServiceCard/ServiceCard";
 
 const Home = () => {
   const [service, setService] = useServices();
-  console.log(service);
+ 
   return (
     <div>
       <div className="">

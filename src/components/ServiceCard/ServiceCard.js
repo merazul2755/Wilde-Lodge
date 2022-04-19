@@ -1,12 +1,20 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
 
 const ServiceCard = (props) => {
   const { name, img, des,id} = props.service;
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+
   const navigateToServiceDetail = (id) => {
-    navigate(`/checkout/${id}`);
+    if(user){
+      navigate(`/checkout/${id}`);
+    }else{
+      navigate('/login')
+    }
   };
   return (
     <div>
