@@ -98,7 +98,7 @@ const Login = () => {
             <p>
               Forget Password?{" "}
               <strong
-                onClick={handlePasswordReset}
+                onClick={()=>handlePasswordReset(email)}
                 className="text-red-500 cursor-pointer"
               >
                 Click Here!
